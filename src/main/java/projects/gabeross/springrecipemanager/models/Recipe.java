@@ -3,6 +3,7 @@ package projects.gabeross.springrecipemanager.models;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,8 @@ public class Recipe {
     // mappedBy defines the back-mapping. essentially the field in the many object that will contain the reference
     // to this one recipe object
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
+    //private Set<Ingredient> ingredients;
 
     // store this in a Blob field in the database
     @Lob
@@ -45,7 +47,8 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
     joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
+    // private Set<Category> categories;
 
     public Long getId() {
         return id;
